@@ -207,20 +207,29 @@ var (
 	max_responses = len(responses)
 )
 
+func blankHandler(w http.ResponseWriter, r *http.Request) {
+	return
+}
+
 func v1handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+
 	num, _ := strconv.ParseInt(r.FormValue("num"), 10, 0)
+
 	if num <= 1 {
 		fmt.Fprint(w, responses[rand.Intn(max_responses)])
 	} else {
-
+		// Don't let any number be greater than the max number of lessons
 		if num > int64(max_responses) {
 			num = int64(max_responses)
 		}
+
 		resps := make([]PSAResponse, num, num)
+
 		for i := 0; i < int(num); i++ {
 			resps[i] = responses[rand.Intn(max_responses)]
 		}
+
 		fmt.Fprint(w, resps)
 	}
 	return
@@ -229,8 +238,8 @@ func v1handler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	rand.Seed(time.Now().UnixNano())
 	http.HandleFunc("/", v1handler)
+	http.HandleFunc("/favicon.ico", blankHandler)
 	http.HandleFunc("/v1", v1handler)
-	http.HandleFunc("/v1.json", v1handler)
 	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
 		panic(err)

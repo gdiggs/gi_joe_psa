@@ -4,7 +4,11 @@
 
 *All lessons sourced from [this page](http://www.joeheadquarters.com/joeendings.shtml)*
 
-### GET `/v1`
+### GET `/`
+
+Requesting the root path will return the most recent version of the API response
+
+### GET `/v1` / GET `/v1.json`
 
 #### Params
 

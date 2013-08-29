@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -208,7 +209,20 @@ var (
 
 func v1handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprint(w, responses[rand.Intn(max_responses)])
+	num, _ := strconv.ParseInt(r.FormValue("num"), 10, 0)
+	if num <= 1 {
+		fmt.Fprint(w, responses[rand.Intn(max_responses)])
+	} else {
+
+		if num > int64(max_responses) {
+			num = int64(max_responses)
+		}
+		resps := make([]PSAResponse, num, num)
+		for i := 0; i < int(num); i++ {
+			resps[i] = responses[rand.Intn(max_responses)]
+		}
+		fmt.Fprint(w, resps)
+	}
 	return
 }
 

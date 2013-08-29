@@ -11,13 +11,15 @@ import (
 )
 
 type PSAResponse struct {
-	Text      string `json:"text"`
-	Situation string `json:"situation"`
-	Code_name string `json:"code_name"`
-	Season    int    `json:"season"`
+	Text                string `json:"text"`
+	Situation           string `json:"situation"`
+	Code_name           string `json:"code_name"`
+	Season              int    `json:"season"`
+	Pct_battle_complete int    `json:"pct_battle_complete"`
 }
 
 func (r PSAResponse) String() (s string) {
+	r.Pct_battle_complete = PCT_BATTLE_COMPLETE
 	b, err := json.Marshal(r)
 	if err != nil {
 		fmt.Println(err)

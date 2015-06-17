@@ -1,21 +1,21 @@
 package main
 
 import (
-	"encoding/json"
+  	             "encoding/json"
 	"fmt"
 	"math/rand"
-	"net/http"
+"net/http"
 	"os"
 	"strconv"
 	"time"
 )
 
 type PSAResponse struct {
-	Text                string `json:"text"`
-	Situation           string `json:"situation"`
-	Code_name           string `json:"code_name"`
-	Season              int    `json:"season"`
-	Pct_battle_complete int    `json:"pct_battle_complete"`
+Text                string `json:"text"`
+Situation           string `json:"situation"`
+Code_name           string `json:"code_name"`
+Season              int    `json:season"`
+Pct_battle_complete int    `json:"pct_battle_complete"`
 }
 
 func (r PSAResponse) String() (s string) {

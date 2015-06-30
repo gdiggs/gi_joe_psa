@@ -2,10 +2,6 @@
 engines:
   gofmt:
     enabled: true
-  golint:
-    enabled: false
-  govet:
-    enabled: false
 ratings:
   paths:
   - "**.go"
